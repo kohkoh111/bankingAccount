@@ -1,11 +1,13 @@
 package bankAccountApp;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class bankAccount {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		List<Account>accounts = new LinkedList<Account>();
 		
 		String file = "/Users/kohki/Downloads/NewBankAccounts.csv";
 		List<String[]> newAccountHolder = utilities.CSV.read(file);
@@ -15,18 +17,20 @@ public class bankAccount {
 			String accountType = accountHolder[2];
 			double initDeposit = Double.parseDouble(accountHolder[3]);
 			
-			//System.out.println(name + " " + sSN + " " + accountType + " " + "$" + initDeposit);
-			if(accountType.equals("Saving")) {
-				System.out.println("Open a saving account");
+			
+			if(accountType.equals("Savings")) {
+				accounts.add(new Saving(name, sSN, initDeposit));
+				
 			}else if(accountType.equals("Checking")) {
-				System.out.println("Open a checking account");
+				accounts.add(new Saving(name, sSN, initDeposit));
+				
 			}else {
 				System.out.println("Error reading account type");
 			}
 		}
-		
-		
-		
+		for(Account acc : accounts) {
+			System.out.println("******************");
+			acc.showInfo();
+		}
 	}
-
 }
